@@ -26,7 +26,7 @@ function RegisterForm() {
       dispatch(registerSuccess(res.data.msg));
       setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
-      const msg = err.response?.data?.msg || 'Error al registrar';
+      const msg = err.response?.data?.msg || 'Error while registering';
       setError(msg);
       dispatch(registerFailure(msg));
     }
@@ -41,8 +41,8 @@ function RegisterForm() {
 
       <div className="mb-3">
         <input
-          {...register('name', { required: 'Nombre requerido' })}
-          placeholder="Nombre"
+          {...register('name', { required: 'Name required' })}
+          placeholder="Name"
           className="w-full p-2 border rounded"
         />
         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
@@ -50,7 +50,7 @@ function RegisterForm() {
 
       <div className="mb-3">
         <input
-          {...register('email', { required: 'Email requerido' })}
+          {...register('email', { required: 'Email required' })}
           placeholder="Email"
           className="w-full p-2 border rounded"
         />
@@ -59,8 +59,8 @@ function RegisterForm() {
 
       <div className="mb-4">
         <input
-          {...register('password', { required: 'Contraseña requerida' })}
-          placeholder="Contraseña"
+          {...register('password', { required: 'Password required' })}
+          placeholder="Password"
           type="password"
           className="w-full p-2 border rounded"
         />
