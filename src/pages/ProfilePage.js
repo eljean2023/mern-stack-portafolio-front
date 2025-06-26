@@ -12,6 +12,30 @@ function ProfilePage() {
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (!token) return navigate('/login');
+
+  const fetchProfile = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/user/profile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(setUser(res.data));
+    } catch (error) {
+      console.error('Invalid Token or expired:', error.message);
+      localStorage.removeItem('token');
+      dispatch(logout());
+      navigate('/login');
+    }
+  };
+
+  fetchProfile();
+}, [dispatch, navigate]);
+
+  
+  
+  /*
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
@@ -22,6 +46,7 @@ function ProfilePage() {
       .catch(() => navigate('/login'));
   }, [dispatch, navigate]);
 
+  */
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
