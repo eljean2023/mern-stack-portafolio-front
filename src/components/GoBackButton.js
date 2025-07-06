@@ -1,4 +1,3 @@
-// src/components/GoBackButton.js
 import { useNavigate } from 'react-router-dom';
 
 function GoBackButton() {
